@@ -13,21 +13,20 @@ function openProject(title, type, description, image, technologies) {
     const modalImage = document.getElementById("modalImage");
     const modalTech = document.getElementById("modalTech");
 
-    // Set project details
+    if (!modal) return;
+
     modalTitle.textContent = title;
     modalType.textContent = type;
     modalDescription.textContent = description;
 
-    // Set image path
-    modalImage.src = image;
-    modalImage.alt = title;
-
-    // Handle image loading error
     modalImage.onerror = function () {
+        this.onerror = null;
         this.src = "https://placehold.co/1200x700?text=Project+Image+Not+Found";
     };
 
-    // Add technologies
+    modalImage.src = image;
+    modalImage.alt = title;
+
     modalTech.innerHTML = "";
 
     technologies.forEach(function (tech) {
@@ -36,43 +35,90 @@ function openProject(title, type, description, image, technologies) {
         modalTech.appendChild(span);
     });
 
-    // Show modal
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
 }
 
 
-/* CLOSE MODAL */
+/* =========================================
+   CLOSE MODAL
+========================================= */
 
 function closeProject() {
 
     const modal = document.getElementById("projectModal");
 
+    if (!modal) return;
+
     modal.classList.remove("active");
     document.body.style.overflow = "";
-
 }
 
 
-/* CLICK OUTSIDE */
+/* =========================================
+   CLICK OUTSIDE MODAL
+========================================= */
 
 document.addEventListener("click", function (event) {
 
     const modal = document.getElementById("projectModal");
 
-    if (event.target === modal) {
+    if (modal && event.target === modal) {
         closeProject();
     }
 
 });
 
 
-/* ESC KEY */
+/* =========================================
+   ESC KEY
+========================================= */
 
 document.addEventListener("keydown", function (event) {
 
     if (event.key === "Escape") {
         closeProject();
     }
+
+});
+
+
+/* =========================================
+   REVEAL ANIMATION
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    // Fallback if IntersectionObserver is unavailable
+    if (!("IntersectionObserver" in window)) {
+        revealElements.forEach(function (element) {
+            element.classList.add("visible");
+        });
+        return;
+    }
+
+    const observer = new IntersectionObserver(
+        function (entries, observer) {
+
+            entries.forEach(function (entry) {
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.1
+        }
+    );
+
+    revealElements.forEach(function (element) {
+        observer.observe(element);
+    });
 
 });

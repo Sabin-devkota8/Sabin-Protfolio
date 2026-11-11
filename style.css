@@ -335,13 +335,9 @@ button {
 
 .marquee-track {
     display: flex;
-    align-items: center;
-    gap: 32px;
     width: max-content;
-    padding: 22px 0;
-
+    gap: 32px;
     animation: marquee 35s linear infinite;
-    will-change: transform;
 }
 
 .marquee span {
@@ -365,7 +361,6 @@ button {
         transform: translateX(-50%);
     }
 }
-
 
 /* SECTIONS */
 

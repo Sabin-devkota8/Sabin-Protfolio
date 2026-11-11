@@ -323,34 +323,44 @@ button {
 }
 
 
+
 /* MARQUEE */
 
 .marquee {
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     overflow: hidden;
+    width: 100%;
 }
 
 .marquee-track {
     display: flex;
+    align-items: center;
     gap: 32px;
     width: max-content;
     padding: 22px 0;
-    animation: marquee 25s linear infinite;
+
+    animation: marquee 35s linear infinite;
+    will-change: transform;
 }
 
 .marquee span {
     font-family: "Space Grotesk";
     font-size: 14px;
     letter-spacing: 2px;
+    white-space: nowrap;
 }
 
 .marquee i {
     color: var(--accent);
     font-style: normal;
+    flex-shrink: 0;
 }
 
 @keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
     to {
         transform: translateX(-50%);
     }

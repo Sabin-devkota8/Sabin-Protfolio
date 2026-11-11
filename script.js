@@ -5,6 +5,8 @@
 
 function openProject(title, type, description, image, technologies) {
 
+   console.log("Explore Project Clicked:", title);
+
     const modal = document.getElementById("projectModal");
 
     const modalTitle = document.getElementById("modalTitle");

@@ -130,14 +130,27 @@ button {
     background: none;
     border: 0;
     cursor: pointer;
+    position: relative;
+    z-index: 60;
+    padding: 10px;
 }
 
 .menu-btn span {
     display: block;
     width: 25px;
-    height: 1px;
+    height: 2px;
     background: white;
-    margin: 6px;
+    margin: 6px 0;
+    transition: 0.3s ease;
+}
+
+/* Animate two lines */
+.menu-btn.active span:first-child {
+    transform: translateY(4px) rotate(45deg);
+}
+
+.menu-btn.active span:last-child {
+    transform: translateY(-4px) rotate(-45deg);
 }
 
 

@@ -141,3 +141,99 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+
+
+/* =========================================
+   MOBILE NAVIGATION MENU
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    if (!menuBtn || !navLinks) return;
+
+    // Open and close menu
+    menuBtn.addEventListener("click", function () {
+
+        const isOpen = navLinks.classList.toggle("active");
+
+        menuBtn.classList.toggle("active", isOpen);
+
+        menuBtn.setAttribute("aria-expanded", isOpen);
+
+        menuBtn.setAttribute(
+            "aria-label",
+            isOpen ? "Close menu" : "Open menu"
+        );
+
+        document.body.classList.toggle("menu-open", isOpen);
+    });
+
+    // Close menu after clicking a navigation link
+    navLinks.querySelectorAll("a").forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            navLinks.classList.remove("active");
+            menuBtn.classList.remove("active");
+
+            menuBtn.setAttribute("aria-expanded", "false");
+            menuBtn.setAttribute("aria-label", "Open menu");
+
+            document.body.classList.remove("menu-open");
+        });
+
+    });
+
+    // Close menu using Escape key
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key === "Escape") {
+
+            navLinks.classList.remove("active");
+            menuBtn.classList.remove("active");
+
+            menuBtn.setAttribute("aria-expanded", "false");
+            menuBtn.setAttribute("aria-label", "Open menu");
+
+            document.body.classList.remove("menu-open");
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   BACK TO TOP BUTTON
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const topBtn = document.getElementById("topBtn");
+
+    if (!topBtn) return;
+
+    window.addEventListener("scroll", function () {
+
+        if (window.scrollY > 300) {
+            topBtn.classList.add("show");
+        } else {
+            topBtn.classList.remove("show");
+        }
+
+    });
+
+    topBtn.addEventListener("click", function () {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+});

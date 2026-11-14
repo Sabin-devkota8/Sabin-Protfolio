@@ -124,3 +124,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+  // Close menu using Escape key
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key === "Escape") {
+
+            navLinks.classList.remove("active");
+            document.body.classList.remove("menu-open");
+
+            menuBtn.setAttribute("aria-expanded", "false");
+            menuBtn.setAttribute("aria-label", "Open menu");
+
+        }
+
+    });
+
+});
